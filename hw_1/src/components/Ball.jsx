@@ -5,22 +5,19 @@ class Ball extends Component {
         super(props);
         this.state = {
             isClicked: false
-        }
+        };
     }
 
-    moveBall = (e) => {
-        if(!this.state.isClicked) {
-            e.target.style.transform = 'translateX(500px)';
-            this.setState({isClicked: !this.state.isClicked})
-        } else {
-            e.target.style.transform = 'translateX(0)';
-            this.setState((prevState) => ({ isClicked: !prevState }))
-        }
-    }
+    moveBall = () => {
+        this.setState(prevState => ({
+            isClicked: !prevState.isClicked
+        }));
+    };
 
     render() {
         return (
-            <div className="ball" onClick={this.moveBall}></div>
+            <div className={this.state.isClicked ? 'ball active' : 'ball'} onClick={this.moveBall}>
+            </div>
         );
     }
 }
