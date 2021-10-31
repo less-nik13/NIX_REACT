@@ -49,15 +49,17 @@ class Form extends Component {
     }
 
     render() {
+        const { message, name, email, password } = this.state;
+
         return (
             <form className="form">
                 <h2>Register</h2>
-                {localStorage.getItem("userData") && <h3 className="form__message">{this.state.message}</h3>}
-                <Input name="name" type="text" handleChange={this.handleChange} value={this.state.name}
+                {message && <h3 className="form__message">{this.state.message}</h3>}
+                <Input name="name" type="text" handleChange={this.handleChange} value={name}
                        maxLength="20"/>
-                <Input name="email" type="email" handleChange={this.handleChange} value={this.state.email}
+                <Input name="email" type="email" handleChange={this.handleChange} value={email}
                        maxLength="60"/>
-                <Input name="password" type="password" handleChange={this.handleChange} value={this.state.password}
+                <Input name="password" type="password" handleChange={this.handleChange} value={password}
                        maxLength="20"/>
                 <SubmitButton handleSubmit={this.handleSubmit}/>
             </form>
