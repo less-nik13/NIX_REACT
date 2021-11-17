@@ -1,0 +1,28 @@
+.footer {
+  height: 70px;
+  flex: 0 0 auto;
+  background-color: $primary;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+
+  &__text {
+    font-size: 18px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $secondary;
+    transition: color .4s ease-in-out;
+
+    &:hover {
+      color: #ffaa9a;
+    }
+  }
+
+  &__created-by {
+    font-weight: 600;
+  }
+}

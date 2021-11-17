@@ -1,0 +1,7 @@
+export const GET_TODOS = 'GET_TODOS';
+export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
+export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
+export const LOADING_TODOS_STARTED = 'LOADING_TODOS_STARTED';
+export const COMPLETE_TODO = 'COMPLETE_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';

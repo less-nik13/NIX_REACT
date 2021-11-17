@@ -1,0 +1,232 @@
+{
+  "todos": [
+    {
+      "id": "ItPomdefbOwyUJ3zF5Ma",
+      "text": "test",
+      "completed": false,
+      "color": "yellow",
+      "backgroundColor": "blue",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "v4EgsCfpm_PuF2iwF8oZ",
+      "text": "text1",
+      "completed": false,
+      "color": "yellow",
+      "backgroundColor": "black",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "YLFpYbxZ0Ec4ce2ebRPD",
+      "text": "n22222",
+      "completed": true,
+      "color": "yellow",
+      "backgroundColor": "grey",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "FekJtMDfMr8CYarIExMy",
+      "text": "Redo posted tod007",
+      "completed": false,
+      "color": "yellow",
+      "backgroundColor": "red",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "nMgJUr2kWQlEPkXORZ17",
+      "text": "111111111111",
+      "completed": true,
+      "color": "white",
+      "backgroundColor": "black",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "sJ3M8ttsjp9Yz_uoZXfv",
+      "text": "new todododo",
+      "completed": false,
+      "color": "grey",
+      "backgroundColor": "blue",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "ldGQQfs3fgeVFDRCLE0r",
+      "text": "new todo 2222",
+      "completed": true,
+      "color": "red",
+      "backgroundColor": "grey",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "mthrtciFCET4SXTaE3QK",
+      "text": "start",
+      "completed": false,
+      "color": "red",
+      "backgroundColor": "black",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "d4oUnEtvix4hZBxIs3Vf",
+      "text": "task kast",
+      "completed": false,
+      "color": "yellow",
+      "backgroundColor": "red",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "58ESAounKGqpczKJGWe_",
+      "text": "wast",
+      "completed": false,
+      "color": "white",
+      "backgroundColor": "grey",
+      "userId": "ksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "aNqFiBXtUFBiEpgMcx1WA",
+      "text": "first todo",
+      "completed": false,
+      "color": "white",
+      "backgroundColor": "black",
+      "userId": "aksVTcofS4pxTKwTvUjVZ"
+    },
+    {
+      "id": "bNqFiBXtUFBiEpgMcx1WA",
+      "text": "first todo",
+      "completed": false,
+      "color": "white",
+      "backgroundColor": "black",
+      "userId": "bksVTcofS4pxTKwTvUjVZ"
+    }
+  ],
+  "colors": [
+    {
+      "id": "nQMpvAo-yZMbKOy9HNmAV",
+      "color": "#fff",
+      "name": "white"
+    },
+    {
+      "id": "TnjMk4gurDNsdgsa22zUX",
+      "color": "#ff1f1f",
+      "name": "red"
+    },
+    {
+      "id": "Km48zh8JseayTk3E1BIKc",
+      "color": "#24bdee",
+      "name": "blue"
+    },
+    {
+      "id": "M244ufSOXzkypn7ITzXP1",
+      "color": "#FFD537FF",
+      "name": "yellow"
+    },
+    {
+      "id": "3fP3BVd_YX3vcom8LAcQQ",
+      "color": "#313131",
+      "name": "grey"
+    },
+    {
+      "id": "3fP3BVd_YX3vcom8LAcQr",
+      "color": "#000",
+      "name": "black"
+    }
+  ],
+  "backgrounds": [
+    {
+      "id": "nQMpvA1-yZMbKOy9HNmAV",
+      "color": "#fff",
+      "name": "white"
+    },
+    {
+      "id": "TnjMk4gurDNsdgsa23zUX",
+      "color": "#ff1f1f",
+      "name": "red"
+    },
+    {
+      "id": "Km48zh8JseayTk3c1BIKc",
+      "color": "#24bdee",
+      "name": "blue"
+    },
+    {
+      "id": "M244ufSOXzkypn73TzXP1",
+      "color": "#41e15c",
+      "name": "green"
+    },
+    {
+      "id": "3fP3BVd_YX3vcon8LAcQQ",
+      "color": "#313131",
+      "name": "grey"
+    },
+    {
+      "id": "3fP3BVd_YX3vcon8LAcQe",
+      "color": "#000",
+      "name": "black"
+    }
+  ],
+  "users": [
+    {
+      "id": "BTRX-7g8Hkt3NcSAD4Pe",
+      "email": "nikita@gmail.com",
+      "name": "Nikita",
+      "password": "$2a$10$W57fAOPmz9LSzuo4N.j4d.ju8tqg/oRbGKEo0TKARaqGna5e2sObO"
+    },
+    {
+      "id": "r62yN2ZcYTB4NVsQUXSd",
+      "email": "nikita1@gmail.com",
+      "name": "Nikita",
+      "password": "$2a$10$QEXYF23EecpoIRKZDYaNve17YGFh.zjTtuQutU/cKN762EZYLsV3G"
+    },
+    {
+      "id": "nBGbQ5RYBj-zewmG3VH1",
+      "email": "assss",
+      "name": "asd",
+      "password": "$2a$10$iuU1OSf/Q9i0biLxQXne2uIMDVF.51JEfjeXUazPMWMrH4m4h1PJW"
+    },
+    {
+      "id": "cVbk2W7Ijup8Zmlb38c5",
+      "email": "ass",
+      "name": "sada",
+      "password": "$2a$10$Gwt0HbhF9TfujQHCPxSUr.AuAPC0xwXLteROfN8IZLTfAoy/BrQWi"
+    },
+    {
+      "id": "hUMdgrMPzTM5Nm8gpgIU",
+      "email": "sdfsdf",
+      "name": "wewfs",
+      "password": "$2a$10$LcohDeJY9/Ibrv1CUCFv3OAzL63zzSKicqYAa6APvUCBDV.terSmq"
+    },
+    {
+      "id": "3N6pgByiFuBmK5k0O0jX",
+      "email": "car",
+      "name": "as",
+      "password": "$2a$10$AiQfUWIfpvZ65Wbelt3q4uO5FGTS4pKZZz2zZR9w8gjQG81zpHIV2"
+    },
+    {
+      "id": "f7dq3CT_Yrl_a8vX82JO",
+      "email": "carvv@mail.ca",
+      "name": "car",
+      "password": "$2a$10$SJiSWO7kK7Pso2sMkRMroexnsgevfOP3lPygjWsZva0sebKNnqDcK"
+    },
+    {
+      "id": "h6KAxU9ciFcGPQsYJnuG",
+      "email": "user1@mail.com",
+      "name": "asssa",
+      "password": "$2a$10$yiQhN2X1t.1HQuAxiXmku.0t6l.T62q4AWFPu/IDZjIsm8Q1MDx.."
+    },
+    {
+      "id": "ksVTcofS4pxTKwTvUjVZ",
+      "email": "nik13@gmail.com",
+      "name": "nik",
+      "password": "$2a$10$mcQfRar3OaIeGNxMAS8ANu1XyB6AkEe6wTUjwRUiP74YmwoI8r2Oa"
+    },
+    {
+      "id": "kGSuOGowiyDihj9-7FRz",
+      "email": "niki@gmail.com",
+      "name": "Nikita",
+      "password": "$2a$10$8fV1Ypwglat0vVx9/dllvOfmiHXScL8SNGZNBkvwbyfNxV3z94C1i"
+    },
+    {
+      "id": "9FedPduhYoc-x2Aa6vXV",
+      "email": "nikkk@gmail.com",
+      "name": "nikk",
+      "password": "$2a$10$NRxmZnmAiSOmttQTe0CHKuHCoWcmTPF8ikm8laxFlK.EtOjeLMG3u"
+    }
+  ]
+}

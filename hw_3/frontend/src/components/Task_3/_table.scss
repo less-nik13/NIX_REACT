@@ -1,0 +1,37 @@
+$color-form-highlight: #545454;
+$color-form-secondary: #777777;
+
+.table {
+  border: 1px solid $color-form-highlight;
+}
+
+.table-header {
+  background: #000;
+  font-weight: bold;
+}
+
+.table-row {
+  padding: 15px;
+
+  &:nth-of-type(odd) {
+    background: $color-form-highlight;
+  }
+
+  &:nth-of-type(even) {
+    background: $color-form-secondary;
+  }
+}
+
+.table-data, .header__item {
+  text-align: center;
+  padding: 15px 30px;
+  font-size: 22px;
+}
+
+.header__item {
+  padding: 15px;
+}
+
+.header__item {
+  text-transform: uppercase;
+}
