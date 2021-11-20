@@ -1,0 +1,42 @@
+.alert {
+  &__content {
+    position: fixed;
+    max-width: 200px;
+    margin: 35px 0 0 50px;
+    top: 150px;
+    right: 200px;
+    font-size: 14px;
+    z-index: 1000;
+  }
+
+  &__message {
+    padding: 10px 15px;
+    text-align: center;
+  }
+
+  &__message:nth-child(even) {
+    margin: 25px 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .alert {
+    right: 50px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .alert {
+    right: 150px;
+  }
+}
+
+.error {
+  background-color: $error;
+  box-shadow: rgba(252, 77, 77, 0.5) 0px 3px 8px;
+}
+
+.success {
+  background-color: $success;
+  box-shadow: rgba(65, 225, 92, 0.5) 0px 3px 8px;
+}
