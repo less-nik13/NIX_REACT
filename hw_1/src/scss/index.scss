@@ -1,0 +1,23 @@
+@import 'fonts';
+@import 'variables';
+@import 'libs/normalize';
+
+@import 'components/all';
+
+* {
+  font-family: 'Proxima Nova', Roboto, system-ui, Tahoma, sans-serif;
+}
+
+body {
+  background-color: $background;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  text-align: center;
+}
