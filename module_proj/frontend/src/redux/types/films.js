@@ -1,0 +1,2 @@
+export const GET_FILMS = 'GET_FILMS';
+export const LOADING_FILMS_STARTED = 'LOADING_FILMS_STARTED';

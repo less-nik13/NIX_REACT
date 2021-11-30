@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "BTRX-7g8Hkt3NcSAD4Pe",
+      "email": "nikita@gmail.com",
+      "name": "Nikita",
+      "password": "$2a$10$W57fAOPmz9LSzuo4N.j4d.ju8tqg/oRbGKEo0TKARaqGna5e2sObO"
+    },
+    {
+      "id": "r62yN2ZcYTB4NVsQUXSd",
+      "email": "nikita1@gmail.com",
+      "name": "Nikita",
+      "password": "$2a$10$QEXYF23EecpoIRKZDYaNve17YGFh.zjTtuQutU/cKN762EZYLsV3G"
+    },
+    {
+      "id": "kGSuOGowiyDihj9-7FRz",
+      "email": "niki@gmail.com",
+      "name": "Nikita",
+      "password": "$2a$10$8fV1Ypwglat0vVx9/dllvOfmiHXScL8SNGZNBkvwbyfNxV3z94C1i"
+    },
+    {
+      "id": "9FedPduhYoc-x2Aa6vXV",
+      "email": "nikkk@gmail.com",
+      "name": "nikk",
+      "password": "$2a$10$NRxmZnmAiSOmttQTe0CHKuHCoWcmTPF8ikm8laxFlK.EtOjeLMG3u"
+    },
+    {
+      "id": "2Kg06FmEkmZWlG_jeYQP",
+      "email": "nik13@gmail.com",
+      "name": "Nikita",
+      "password": "$2a$10$kOTUAR8e1yzUDxyrwWfRqOyLen7ViHNFbXNtsQ3Ix5/17bw2zJabS"
+    }
+  ]
+}
