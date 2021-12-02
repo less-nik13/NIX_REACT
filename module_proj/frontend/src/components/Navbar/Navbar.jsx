@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useTheme } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
 import AppBar from '@mui/material/AppBar';
@@ -50,7 +50,7 @@ const ResponsiveAppBar = () => {
                             marginRight: { md: 2 },
                             display: { xs: 'none', md: 'flex' },
                             order: { xs: '1', md: '0' },
-                            ['@media (min-width:410px)']: {
+                            '@media (min-width:410px)': {
                                 display: 'flex'
                             }
                         }}
@@ -66,19 +66,25 @@ const ResponsiveAppBar = () => {
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                                 <List className={classes.list} disablePadding>
                                     <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <Link className={classes.link} to="/">
+                                        <NavLink to="/" className={classes.link} style={({ isActive }) => ({
+                                            color: isActive ? "#ffd537" : ""
+                                        })}>
                                             Home
-                                        </Link>
+                                        </NavLink>
                                     </ListItem>
                                     <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <Link className={classes.link} to="/">
+                                        <NavLink className={classes.link} to="/top" style={({ isActive }) => ({
+                                            color: isActive ? "#ffd537" : ""
+                                        })}>
                                             Top Rated
-                                        </Link>
+                                        </NavLink>
                                     </ListItem>
                                     <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <Link className={classes.link} to="/">
+                                        <NavLink className={classes.link} to="/upcoming" style={({ isActive }) => ({
+                                            color: isActive ? "#ffd537" : ""
+                                        })}>
                                             Upcoming
-                                        </Link>
+                                        </NavLink>
                                     </ListItem>
                                     {!isAuthenticated &&
                                         <>
@@ -102,7 +108,7 @@ const ResponsiveAppBar = () => {
                     <NavSearch/>
                     {isAuthenticated &&
                         <Box sx={{ flexGrow: 0, marginLeft: '20px', display: { xs: 'none', md: 'block' } }}>
-                            <Tooltip title="Open settings">
+                            <Tooltip title="User">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar>
                                         <PersonIcon sx={{ color: theme.palette.link }}/>
@@ -127,17 +133,21 @@ const ResponsiveAppBar = () => {
                             >
                                 <List disablePadding>
                                     <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <Link className={classes.link} to="/">
+                                        <NavLink className={classes.link} to="/profile" style={({ isActive }) => ({
+                                            color: isActive ? "#ffd537" : ""
+                                        })}>
                                             Profile
-                                        </Link>
+                                        </NavLink>
                                     </ListItem>
                                     <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <Link className={classes.link} to="/">
+                                        <NavLink className={classes.link} to="/favorites" style={({ isActive }) => ({
+                                            color: isActive ? "#ffd537" : ""
+                                        })}>
                                             Favorites
-                                        </Link>
+                                        </NavLink>
                                     </ListItem>
                                     <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <Link className={classes.link} to="/">
+                                        <Link className={classes.link} to="/logout">
                                             Logout
                                         </Link>
                                     </ListItem>

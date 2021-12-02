@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             color: theme.palette.link
         },
-    },
+    }
 }));
 
 export default useStyles;

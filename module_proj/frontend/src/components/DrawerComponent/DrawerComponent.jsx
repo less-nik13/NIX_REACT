@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -71,19 +71,25 @@ function DrawerComponent({ isAuthenticated }) {
                 <Divider/>
                 <List className={classes.list} disablePadding>
                     <ListItem sx={{ padding: 0, transition: 'background .3s ease-in-out' }} button disableGutters>
-                        <Link className={classes.link} to="/">
+                        <NavLink className={classes.link} to="/" style={({ isActive }) => ({
+                            color: isActive ? "#ffd537" : ""
+                        })}>
                             Home
-                        </Link>
+                        </NavLink>
                     </ListItem>
                     <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button disableGutters>
-                        <Link className={classes.link} to="/">
+                        <NavLink className={classes.link} to="/top" style={({ isActive }) => ({
+                            color: isActive ? "#ffd537" : ""
+                        })}>
                             Top Rated
-                        </Link>
+                        </NavLink>
                     </ListItem>
                     <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button disableGutters>
-                        <Link className={classes.link} to="/">
+                        <NavLink className={classes.link} to="/upcoming" style={({ isActive }) => ({
+                            color: isActive ? "#ffd537" : ""
+                        })}>
                             Upcoming
-                        </Link>
+                        </NavLink>
                     </ListItem>
                 </List>
                 <Divider/>
@@ -96,24 +102,32 @@ function DrawerComponent({ isAuthenticated }) {
                                     Sign Up
                                 </Link>
                             </ListItem>
-                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button disableGutters>
+                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button
+                                      disableGutters>
                                 <Link className={classes.link} to="/login">
                                     Sign In
                                 </Link>
                             </ListItem>
                         </> :
                         <>
-                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button disableGutters>
-                                <Link className={classes.link} to="/profile">
+                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button
+                                      disableGutters>
+                                <NavLink className={classes.link} to="/profile" style={({ isActive }) => ({
+                                    color: isActive ? "#ffd537" : ""
+                                })}>
                                     Profile
-                                </Link>
+                                </NavLink>
                             </ListItem>
-                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button disableGutters>
-                                <Link className={classes.link} to="/favorites">
+                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button
+                                      disableGutters>
+                                <NavLink className={classes.link} to="/favorites" style={({ isActive }) => ({
+                                    color: isActive ? "#ffd537" : ""
+                                })}>
                                     Favorites
-                                </Link>
+                                </NavLink>
                             </ListItem>
-                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button disableGutters>
+                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button
+                                      disableGutters>
                                 <Link className={classes.link} to="/logout">
                                     Logout
                                 </Link>

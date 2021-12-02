@@ -12,9 +12,15 @@ const NotFound = () => {
     return (
         <Box className={classes.root}>
             <Typography variant="h1">404</Typography>
-            <Typography sx={{textAlign: 'center', margin: '25px 15px'}} variant="h4" my={3}>Oops! Looks like you got lost
-                🤔</Typography>
-            <Button className={classes.button} size='large' sx={{padding: '10px 20px', fontSize: '16px'}} variant="outlined" onClick={() => navigate(-1)} startIcon={<KeyboardBackspaceIcon/>}>
+            <Typography sx={{textAlign: 'center', margin: '25px 15px'}} variant="h4" my={3}>
+                Oops! Looks like you got lost 🤔
+            </Typography>
+            <Button className={classes.button}
+                    size='large'
+                    sx={{padding: '10px 20px', fontSize: '16px'}}
+                    variant="outlined"
+                    onClick={() => navigate(-1)}
+                    startIcon={<KeyboardBackspaceIcon/>}>
                 Go Back
             </Button>
         </Box>

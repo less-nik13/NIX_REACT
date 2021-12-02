@@ -5,7 +5,7 @@ const CustomizedSnackbar = props => {
     const { vertical, horizontal, message, type, showAlert } = props;
 
     return (
-        <Snackbar anchorOrigin={{ vertical, horizontal }} open={showAlert}>
+        <Snackbar sx={{marginTop: '50px'}} anchorOrigin={{ vertical, horizontal }} open={showAlert}>
             <Alert severity={type} variant="filled">
                 {message}
             </Alert>
