@@ -9,6 +9,7 @@ export const paletteDark = {
         black,
         white,
         commonBackground: 'rgb(45, 45, 45)',
+        blue: '#03A9F4FF',
         contrastText: white,
         neutral: '#E4E7EB',
         muted: '#9EA0A4'

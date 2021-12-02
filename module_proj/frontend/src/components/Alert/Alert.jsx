@@ -1,19 +1,18 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 
-import useStyles from "./alert.style";
+import CustomizedSnackbar from "../CustomizedSnackbar/CustomizedSnackbar";
 
 const Alert = () => {
     const { alert, type, showAlert } = useSelector(state => state.alert);
-    const classes = useStyles();
 
     return (
         <>
-            {showAlert &&
-                <div className={classes.root}>
-                    {alert.map((message, index) => (
-                        <p key={index} className={`${classes.message} ${classes[type]}`}>{message}</p>))}
-                </div>
+            {alert.length > 0 &&
+                alert.map((message, index) =>
+                    <CustomizedSnackbar key={index} message={message} vertical="top" horizontal="center" type={type}
+                                        showAlert={showAlert}/>
+                )
             }
         </>
     );
