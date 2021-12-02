@@ -11,7 +11,7 @@ const Alert = () => {
             {alert.length > 0 &&
                 alert.map((message, index) =>
                     <CustomizedSnackbar vertical="top"
-                                        horizontal="center"
+                                        horizontal="right"
                                         key={index}
                                         message={message}
                                         type={type}

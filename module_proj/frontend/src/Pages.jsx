@@ -5,13 +5,14 @@ import { useSelector } from "react-redux";
 import PublicLayout from "./layouts/PublicLayout/PublicLayout";
 import NotFound from "./pages/404/NotFound";
 import Spinner from "./components/Spinner/Spinner";
+import PrivateRoute from "./routes/PrivateRoute";
 
 // const FavouritesPage = React.lazy(() => import("./pages/FavouritesPage/FavouritesPage"));
 const LoginPage = React.lazy(() => import('./pages/LoginPage/LoginPage'));
 const RegisterPage = React.lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const FilmsPage = React.lazy(() => import('./pages/FilmsPage/FilmsPage'));
 
-// const ProfilePage = React.lazy(() => import('./pages/ProfilePage/ProfilePage'));
+const ProfilePage = React.lazy(() => import('./pages/ProfilePage/ProfilePage'));
 
 function Pages() {
     const { isAuthenticated } = useSelector((state) => state.auth);
@@ -32,11 +33,13 @@ function Pages() {
                     {/*                layout={PublicLayout}*/}
                     {/*                isAuthenticated={isAuthenticated}/>*/}
 
-                    {/*<Route exact path="/profile" element={isAuthenticated &&*/}
-                    {/*    <PublicLayout>*/}
-                    {/*        <ProfilePage />*/}
-                    {/*    </PublicLayout>*/}
-                    {/*}/>*/}
+                    <Route exact path="/profile" element={
+                        <PrivateRoute>
+                            <PublicLayout>
+                                <ProfilePage />
+                            </PublicLayout>
+                        </PrivateRoute>
+                    }/>
 
                     <Route exact path="/login" element={<LoginPage/>}/>
                     <Route exact path="/register" element={<RegisterPage/>}/>

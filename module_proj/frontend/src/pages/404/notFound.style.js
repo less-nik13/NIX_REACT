@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
     },
     button: {
+        border: '1px solid inset',
         '&:hover': {
             color: theme.palette.link,
             border: `1px solid ${theme.palette.link}`,

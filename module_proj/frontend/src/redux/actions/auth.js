@@ -1,13 +1,11 @@
-
 import { setAlert } from "./alert";
-import { LOGIN_SUCCESS, LOGOUT } from "../types/auth";
+import { LOGIN_SUCCESS, LOGOUT, SET_USER } from "../types/auth";
 import { serverInstance } from "../../api/server.config";
-import { LOGIN_URL, REGISTER_URL } from "../../api/api-client";
+import { GET_USER_DATA, LOGIN_URL, LOGOUT_USER, REGISTER_URL } from "../../api/api-client";
 
 // Register user
 export const register = (userCredentials, navigate) => async dispatch => {
     try {
-        console.log(userCredentials);
         const response = await serverInstance.post(REGISTER_URL, userCredentials);
 
         if(response.statusText) {
@@ -22,7 +20,6 @@ export const register = (userCredentials, navigate) => async dispatch => {
 // Login user
 export const login = ({ email, password }, navigate) => async (dispatch) => {
     try {
-        const url = 'api/auth/login';
         const response = await serverInstance.post(LOGIN_URL, {
             email, password
         });
@@ -42,39 +39,34 @@ export const login = ({ email, password }, navigate) => async (dispatch) => {
 };
 
 // User Profile
-// export const getUser = () => async (dispatch) => {
-//     try {
-//         const url = '/user';
-//         const token = localStorage.getItem('token');
-//         const response = await instance(url, {
-//             headers: {
-//                 'Authorization': `Bearer ${token}`
-//             }
-//         });
-//
-//         dispatch({ type: SET_USER, payload: { user: response.data.user } });
-//     } catch(error) {
-//         dispatch(setAlert(error.message, 'error', 4000));
-//     }
-// };
+export const getUser = () => async (dispatch) => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await serverInstance.get(GET_USER_DATA, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        dispatch({ type: SET_USER, payload: { user: response.data.user } });
+    } catch(error) {
+        dispatch(setAlert(error.message, 'error', 4000));
+    }
+};
 
 // Logout user
 export const logout = () => async (dispatch) => {
     try {
         const token = localStorage.getItem('token');
-        const url = '/user/logout';
-        const response = await serverInstance.get(url, {
+        const response = await serverInstance.get(LOGOUT_USER, {
             headers: {
                 Authorization: 'Bearer ' + token
             }
         });
 
-        //Если пользователь авторизован, то из локального хранилища удаляем токен
-        if(token) {
-            localStorage.removeItem('token');
-            dispatch({ type: LOGOUT });
-            dispatch(setAlert(response.data.message, 'success', 4000));
-        }
+        localStorage.removeItem('token');
+        dispatch({ type: LOGOUT });
+        dispatch(setAlert(response.data.message, 'success', 4000));
     } catch(error) {
         dispatch(setAlert(error.message, 'error', 4000));
     }

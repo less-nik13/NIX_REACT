@@ -22,13 +22,14 @@ router.post("/register", async (req, res, next) => {
         // Encrypt password
         const salt = await bcryptjs.genSalt(10);
         const hashedPassword = await bcryptjs.hash(password, salt);
+        const creationDate = new Intl.DateTimeFormat().format(new Date());
 
         // create new user
-        const newUser = { id: generatedId, email, name, password: hashedPassword };
+        const newUser = { id: generatedId, email, name, password: hashedPassword, createdAt: creationDate };
         Users.push(newUser);
 
         await db.write();
-        return res.status(200).json({ message: "Successfully Registered", user: newUser });
+        return res.status(200).json({ message: "Successfully Registered" });
     } catch(e) {
         next(e);
     }

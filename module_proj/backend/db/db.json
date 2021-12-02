@@ -4,31 +4,43 @@
       "id": "BTRX-7g8Hkt3NcSAD4Pe",
       "email": "nikita@gmail.com",
       "name": "Nikita",
-      "password": "$2a$10$W57fAOPmz9LSzuo4N.j4d.ju8tqg/oRbGKEo0TKARaqGna5e2sObO"
+      "password": "$2a$10$W57fAOPmz9LSzuo4N.j4d.ju8tqg/oRbGKEo0TKARaqGna5e2sObO",
+      "createdAt": "02.12.2021"
     },
     {
       "id": "r62yN2ZcYTB4NVsQUXSd",
       "email": "nikita1@gmail.com",
       "name": "Nikita",
-      "password": "$2a$10$QEXYF23EecpoIRKZDYaNve17YGFh.zjTtuQutU/cKN762EZYLsV3G"
+      "password": "$2a$10$QEXYF23EecpoIRKZDYaNve17YGFh.zjTtuQutU/cKN762EZYLsV3G",
+      "createdAt": "02.12.2021"
     },
     {
       "id": "kGSuOGowiyDihj9-7FRz",
       "email": "niki@gmail.com",
       "name": "Nikita",
-      "password": "$2a$10$8fV1Ypwglat0vVx9/dllvOfmiHXScL8SNGZNBkvwbyfNxV3z94C1i"
+      "password": "$2a$10$8fV1Ypwglat0vVx9/dllvOfmiHXScL8SNGZNBkvwbyfNxV3z94C1i",
+      "createdAt": "02.12.2021"
     },
     {
       "id": "9FedPduhYoc-x2Aa6vXV",
       "email": "nikkk@gmail.com",
       "name": "nikk",
-      "password": "$2a$10$NRxmZnmAiSOmttQTe0CHKuHCoWcmTPF8ikm8laxFlK.EtOjeLMG3u"
+      "password": "$2a$10$NRxmZnmAiSOmttQTe0CHKuHCoWcmTPF8ikm8laxFlK.EtOjeLMG3u",
+      "createdAt": "02.12.2021"
     },
     {
       "id": "2Kg06FmEkmZWlG_jeYQP",
       "email": "nik13@gmail.com",
       "name": "Nikita",
-      "password": "$2a$10$kOTUAR8e1yzUDxyrwWfRqOyLen7ViHNFbXNtsQ3Ix5/17bw2zJabS"
+      "password": "$2a$10$kOTUAR8e1yzUDxyrwWfRqOyLen7ViHNFbXNtsQ3Ix5/17bw2zJabS",
+      "createdAt": "02.12.2021"
+    },
+    {
+      "id": "bvc6ffqPHrdWVU5QGwwH",
+      "email": "nik@gmail.com",
+      "name": "Nikita123",
+      "password": "$2a$10$qR8XIoP/p63e0.Vyyie3NO0Su2oaVO3fjt04a48tuIvEe2VNqTHFi",
+      "createdAt": "02.12.2021"
     }
   ]
 }

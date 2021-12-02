@@ -8,7 +8,7 @@ const PublicLayout = ({ children, withFooter = true }) => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Navbar/>
-            <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
+            <Container component="main" sx={{ mt: 6, mb: 2, flex: '1 0 auto'}} maxWidth="sm">
                 {children}
             </Container>
             {withFooter && <Footer/>}

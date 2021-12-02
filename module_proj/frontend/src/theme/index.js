@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 import { paletteDark } from './paletteDark';
 import typography from './typography';
 import ProximaNovaRegular from '../fonts/ProximaNova-Regular.woff';
-import ProximaNovaBold from '../fonts/ProximaNova-Regular.woff';
+import ProximaNovaBold from '../fonts/ProximaNova-Semibold.woff';
 
 const theme = createTheme({
         palette: paletteDark,
@@ -19,7 +19,7 @@ const theme = createTheme({
                       src: local('ProximaNova-Regular'), url(${ProximaNovaRegular}) format('woff'),
                       }
                     @font-face {
-                      font-family: 'Proxima Nova';
+                      font-family: 'Proxima Nova Bold';
                       font-weight: 600;
                       font-style: normal;
                       font-display: swap;

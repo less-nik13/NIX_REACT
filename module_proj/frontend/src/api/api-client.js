@@ -4,5 +4,7 @@ export const GET_MOVIES = `${API_BASE_URL}/discover/movie?api_key=${API_KEY}`;
 
 // SERVER
 export const SERVER_BASE_URL = 'http://localhost:5000';
-export const LOGIN_URL= 'api/auth/login';
+export const LOGIN_URL = 'api/auth/login';
 export const REGISTER_URL = 'api/auth/register';
+export const GET_USER_DATA = 'api/user';
+export const LOGOUT_USER = 'api/user/logout';
