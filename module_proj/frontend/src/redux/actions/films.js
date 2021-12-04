@@ -1,20 +1,22 @@
-import axios from "axios";
-import { GET_FILMS } from "../types/films";
+import { GET_FILMS, LOADING_FILMS_FINISHED, LOADING_FILMS_STARTED } from "../types/films";
 import { setAlert } from "./alert";
 import { GET_MOVIES } from "../../api/api-client";
+import { apiInstance } from "../../api/axios.config";
 
-export const getFilms = () => async (dispatch) => {
+export const getFilms = (options) => async (dispatch) => {
     try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get(GET_MOVIES, {
-            headers: {
-                'Authorization': `Bearer ${token}`
+        const response = await apiInstance.get(GET_MOVIES, {
+            params: {
+                ...options
             }
         });
-        const { todos } = response.data;
+        const filmsData = response.data;
 
-        if(response.statusText) {
-            dispatch({ type: GET_FILMS, payload: todos });
+        dispatch({type: LOADING_FILMS_STARTED})
+
+        if(response.status === 200) {
+            dispatch({type: LOADING_FILMS_FINISHED})
+            dispatch({ type: GET_FILMS, payload: filmsData });
         }
     } catch(error) {
         dispatch(setAlert(error.response.data.message, 'error', 4000));
@@ -26,3 +28,9 @@ export const getFilms = () => async (dispatch) => {
 //         type: LOADING_TODOS_STARTED
 //     };
 // };
+
+// export const selectPage = () => {
+//     return {
+//         type:
+//     }
+// }

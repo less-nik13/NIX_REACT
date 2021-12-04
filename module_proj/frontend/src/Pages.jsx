@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelector } from "react-redux";
 
 import PublicLayout from "./layouts/PublicLayout/PublicLayout";
 import NotFound from "./pages/404/NotFound";
@@ -10,12 +9,11 @@ import PrivateRoute from "./routes/PrivateRoute";
 // const FavouritesPage = React.lazy(() => import("./pages/FavouritesPage/FavouritesPage"));
 const LoginPage = React.lazy(() => import('./pages/LoginPage/LoginPage'));
 const RegisterPage = React.lazy(() => import('./pages/RegisterPage/RegisterPage'));
-const FilmsPage = React.lazy(() => import('./pages/FilmsPage/FilmsPage'));
+const FilmsPage = React.lazy(() => import('./pages/FilmsPage/MoviesPage'));
 
 const ProfilePage = React.lazy(() => import('./pages/ProfilePage/ProfilePage'));
 
 function Pages() {
-    const { isAuthenticated } = useSelector((state) => state.auth);
 
     return (
         <BrowserRouter>

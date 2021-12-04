@@ -2,12 +2,12 @@ import { combineReducers } from "redux";
 
 import alertReducer from "./alertReducer";
 import authReducer from "./authReducer";
-// import filmsReducer from "./filmsReducer";
+import movieReducer from "./movieReducer";
 
 const rootReducer = combineReducers({
     alert: alertReducer,
     auth: authReducer,
-    // films: filmsReducer
+    movie: movieReducer
 });
 
 export default rootReducer;

@@ -38,7 +38,7 @@ const ResponsiveAppBar = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar>
                     <Typography
@@ -50,7 +50,7 @@ const ResponsiveAppBar = () => {
                             marginRight: { md: 2 },
                             display: { xs: 'none', md: 'flex' },
                             order: { xs: '1', md: '0' },
-                            '@media (min-width:410px)': {
+                            '@media (min-width:460px)': {
                                 display: 'flex'
                             }
                         }}

@@ -3,6 +3,13 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles(theme => ({
     wrapper: {
         padding: '15px 25px',
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    inner: {
+        padding: '15px 25px',
+        maxWidth: '600px',
+        width: '100%'
     },
     button: {
         padding: '8px 15px',

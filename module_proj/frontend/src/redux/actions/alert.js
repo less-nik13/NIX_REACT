@@ -4,9 +4,7 @@ export const setAlert = (message, type, timeout = 3500) => (dispatch, getState) 
     const messages = typeof message === 'string' ? [ message ] : message;
     const { alert } = getState();
 
-    if(alert.showAlert) {
-        return;
-    }
+    if(alert.alert.length && alert.alert[0] === messages[0]) return;
 
     dispatch({
         type: SET_ALERT,

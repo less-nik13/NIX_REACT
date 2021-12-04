@@ -1,7 +1,7 @@
 import { setAlert } from "./alert";
 import { LOGIN_SUCCESS, LOGOUT, SET_USER } from "../types/auth";
 import { serverInstance } from "../../api/server.config";
-import { GET_USER_DATA, LOGIN_URL, LOGOUT_USER, REGISTER_URL } from "../../api/api-client";
+import { LOGIN_URL, LOGOUT_URL, REGISTER_URL, USER_DATA_URL } from "../../api/api-client";
 
 // Register user
 export const register = (userCredentials, navigate) => async dispatch => {
@@ -42,7 +42,7 @@ export const login = ({ email, password }, navigate) => async (dispatch) => {
 export const getUser = () => async (dispatch) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await serverInstance.get(GET_USER_DATA, {
+        const response = await serverInstance.get(USER_DATA_URL, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -58,7 +58,7 @@ export const getUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await serverInstance.get(LOGOUT_USER, {
+        const response = await serverInstance.get(LOGOUT_URL, {
             headers: {
                 Authorization: 'Bearer ' + token
             }

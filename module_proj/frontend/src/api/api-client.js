@@ -1,10 +1,11 @@
 export const API_BASE_URL = 'https://api.themoviedb.org/3';
-export const API_KEY = 'd5aa82a2753a4946a5baadc2dfe2f7ae';
-export const GET_MOVIES = `${API_BASE_URL}/discover/movie?api_key=${API_KEY}`;
+export const GET_MOVIES = '/discover/movie';
+export const POSTER_URL = 'https://image.tmdb.org/t/p/original'
+export const MOVIE_URL = API_BASE_URL + '/movie'
 
 // SERVER
 export const SERVER_BASE_URL = 'http://localhost:5000';
 export const LOGIN_URL = 'api/auth/login';
 export const REGISTER_URL = 'api/auth/register';
-export const GET_USER_DATA = 'api/user';
-export const LOGOUT_USER = 'api/user/logout';
+export const USER_DATA_URL = 'api/user';
+export const LOGOUT_URL = 'api/user/logout';
