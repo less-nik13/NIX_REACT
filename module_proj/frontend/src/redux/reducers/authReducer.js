@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGOUT, SET_USER } from "../types/auth";
+import { LOGIN_SUCCESS, LOGOUT } from "../types/authTypes";
 
 const initialState = {
     currentUser: null,
@@ -10,11 +10,8 @@ const authReducer = (state = initialState, { type, payload }) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                isAuthenticated: true
-            };
-        case SET_USER:
-            return {
-                ...state, currentUser: payload.user
+                isAuthenticated: true,
+                currentUser: payload
             };
         case LOGOUT:
             return initialState;

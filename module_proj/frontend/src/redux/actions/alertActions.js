@@ -1,4 +1,4 @@
-import { SET_ALERT, REMOVE_ALERT } from '../types/alert';
+import { SET_ALERT, REMOVE_ALERT } from '../types/alertTypes';
 
 export const setAlert = (message, type, timeout = 3500) => (dispatch, getState) => {
     const messages = typeof message === 'string' ? [ message ] : message;

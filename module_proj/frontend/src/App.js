@@ -4,9 +4,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from "@mui/material/CssBaseline";
 
 import store from "./redux";
+import theme from "./theme";
 import Routes from "./Pages";
 import Alert from "./components/Alert/Alert";
-import theme from "./theme";
 
 const App = () => {
     return (

@@ -10,7 +10,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 
-import { login } from "../../redux/actions/auth";
+import { login } from "../../redux/actions/authActions";
 import Copyright from "../../components/Copyright/Copyright";
 import LoginForm from "../../components/LoginForm/LoginForm";
 

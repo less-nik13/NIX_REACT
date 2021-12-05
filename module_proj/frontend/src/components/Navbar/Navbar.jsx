@@ -1,32 +1,36 @@
 import * as React from 'react';
-import { useSelector } from "react-redux";
-import { Link, NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTheme } from "@emotion/react";
-import { useMediaQuery } from "@mui/material";
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import ListItem from "@mui/material/ListItem";
-import List from "@mui/material/List";
-import PersonIcon from '@mui/icons-material/Person';
+import {
+    useMediaQuery,
+    AppBar,
+    Box,
+    Toolbar,
+    IconButton,
+    Typography,
+    Menu,
+    Container,
+    Avatar,
+    Tooltip,
+    ListItem,
+    List, MenuItem
+} from "@mui/material";
 
 import logo from '../../Logo.png';
 import NavSearch from "../NavSearch/NavSearch";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 
 import useStyles from './navbar.style';
+import { logout } from "../../redux/actions/authActions";
 
 const ResponsiveAppBar = () => {
     const [ anchorElUser, setAnchorElUser ] = React.useState(null);
-    const { isAuthenticated } = useSelector(state => state.auth);
+    const { isAuthenticated, currentUser } = useSelector(state => state.auth);
     const theme = useTheme();
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleOpenUserMenu = (event) => {
@@ -35,6 +39,12 @@ const ResponsiveAppBar = () => {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
+        setAnchorElUser(null);
+        navigate('/');
     };
 
     return (
@@ -60,7 +70,7 @@ const ResponsiveAppBar = () => {
                         </Link>
                     </Typography>
                     {isMobile ?
-                        <Box sx={{ order: { xs: '0' } }}>
+                        <Box sx={{ order: { xs: '0'} }}>
                             <DrawerComponent isAuthenticated={isAuthenticated}/>
                         </Box> : (
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -107,14 +117,16 @@ const ResponsiveAppBar = () => {
                         )}
                     <NavSearch/>
                     {isAuthenticated &&
-                        <Box sx={{ flexGrow: 0, marginLeft: '20px', display: { xs: 'none', md: 'block' } }}>
-                            <Tooltip title="User">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar>
-                                        <PersonIcon sx={{ color: theme.palette.link }}/>
-                                    </Avatar>
-                                </IconButton>
-                            </Tooltip>
+                        <>
+                            <Box sx={{ flexGrow: 0, marginLeft: '20px', display: { xs: 'none', md: 'block' } }}>
+                                <Tooltip title={currentUser.name}>
+                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                        <Avatar sx={{ color: theme.palette.link }}>
+                                            {currentUser.name[0].toUpperCase()}
+                                        </Avatar>
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
                             <Menu
                                 sx={{ mt: '45px' }}
                                 id="menu-appbar"
@@ -131,29 +143,30 @@ const ResponsiveAppBar = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                <List disablePadding>
-                                    <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <NavLink className={classes.link} to="/profile" style={({ isActive }) => ({
-                                            color: isActive ? "#ffd537" : ""
-                                        })}>
-                                            Profile
-                                        </NavLink>
-                                    </ListItem>
-                                    <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <NavLink className={classes.link} to="/favorites" style={({ isActive }) => ({
-                                            color: isActive ? "#ffd537" : ""
-                                        })}>
-                                            Favorites
-                                        </NavLink>
-                                    </ListItem>
-                                    <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <Link className={classes.link} to="/logout">
-                                            Logout
-                                        </Link>
-                                    </ListItem>
-                                </List>
+                                <MenuItem className={classes.listItem} sx={{ padding: 0 }} onClick={handleCloseUserMenu}
+                                          disableGutters>
+                                    <NavLink className={classes.link} to="/profile" style={({ isActive }) => ({
+                                        color: isActive ? "#ffd537" : ""
+                                    })}>
+                                        Profile
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem className={classes.listItem} sx={{ padding: 0 }} onClick={handleCloseUserMenu}
+                                          disableGutters>
+                                    <NavLink className={classes.link} to="/favorites" style={({ isActive }) => ({
+                                        color: isActive ? "#ffd537" : ""
+                                    })}>
+                                        Favorites
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem className={classes.logoutButton}
+                                          onClick={handleLogout}
+                                          disableGutters>
+                                    Logout
+                                </MenuItem>
                             </Menu>
-                        </Box>}
+                        </>
+                    }
                 </Toolbar>
             </Container>
         </AppBar>

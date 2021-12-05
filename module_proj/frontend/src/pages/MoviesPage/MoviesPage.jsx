@@ -1,44 +1,28 @@
 import React, { useEffect, useState } from 'react';
-
-import { Link } from 'react-router-dom';
-import {
-    Box,
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Pagination,
-    TextField,
-    Typography
-} from "@mui/material";
-
-import useStyles from './moviesPage.style';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import Loading from "../../components/Loading/Loading";
-import IconButton from "@mui/material/IconButton";
 import { useDispatch, useSelector } from "react-redux";
-import { getFilms } from "../../redux/actions/films";
+import { Box } from "@mui/material";
+
+import { getMovies } from "../../redux/actions/movieActions";
 import MovieList from "../../components/MovieList/MovieList";
-import Spinner from "../../components/Spinner/Spinner";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import MovieListLoader from "../../components/MovieListLoader/MovieListLoader";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 
 const MoviesPage = () => {
-    const classes = useStyles();
-    const { loading, currentPage, totalPages } = useSelector(state => state.movie);
+    const { loading, currentPage, totalPages, movies } = useSelector(state => state.movie);
     const [ page, setPage ] = useState('1');
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getFilms());
-    }, []);
+        if(!movies.length) {
+            dispatch(getMovies());
+        }
+    }, [ movies ]);
 
     const handlePagination = (event, value) => {
         if(value === currentPage) return;
         setPage(value.toString());
-        dispatch(getFilms({ page: value }));
+        dispatch(getMovies({ page: value }));
     };
 
     const handlePageChange = ({ target: { value } }) => {
@@ -47,12 +31,12 @@ const MoviesPage = () => {
     };
 
     const onBlurChangePage = () => {
-        if(+page !== currentPage) dispatch(getFilms({ page }));
+        if(+page !== currentPage) dispatch(getMovies({ page }));
     };
 
     const onKeyDownChangePage = (e) => {
         if(+page !== currentPage && (e.which === 13 || e.keyCode === 13 || e.key === "Enter")) {
-            dispatch(getFilms({ page }));
+            dispatch(getMovies({ page }));
         }
     };
 
@@ -60,7 +44,7 @@ const MoviesPage = () => {
         <Box sx={{ width: '100%' }}>
             <PageHeader title="Home"/>
             {loading ? <MovieListLoader/> : <>
-                <MovieList/>
+                <MovieList movies={movies}/>
                 <CustomPagination totalPages={totalPages}
                                   currentPage={currentPage}
                                   page={page}

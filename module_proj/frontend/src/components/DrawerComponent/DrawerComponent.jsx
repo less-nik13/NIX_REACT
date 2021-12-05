@@ -1,15 +1,21 @@
 import * as React from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
+import {
+    Box,
+    Typography,
+    Drawer,
+    List,
+    Divider,
+    IconButton,
+    ListItem
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
+
+import { logout } from "../../redux/actions/authActions";
 
 import useStyles from './drawerComponent.style';
 
@@ -26,6 +32,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function DrawerComponent({ isAuthenticated }) {
     const theme = useTheme();
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [ open, setOpen ] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -34,6 +42,12 @@ function DrawerComponent({ isAuthenticated }) {
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
+        setOpen(false);
+        navigate('/');
     };
 
     return (
@@ -126,11 +140,11 @@ function DrawerComponent({ isAuthenticated }) {
                                     Favorites
                                 </NavLink>
                             </ListItem>
-                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button
-                                      disableGutters>
-                                <Link className={classes.link} to="/logout">
-                                    Logout
-                                </Link>
+                            <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }}
+                                      onClick={handleLogout}
+                                      disableGutters
+                                      button>
+                                <Typography className={classes.link}>Logout</Typography>
                             </ListItem>
                         </>}
                 </List>

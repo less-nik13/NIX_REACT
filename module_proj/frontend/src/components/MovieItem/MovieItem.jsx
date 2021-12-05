@@ -1,35 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Card, CardContent, CardMedia, CircularProgress, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, CircularProgress, Tooltip, Typography, Zoom } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import useStyles from "./movieItem.style";
 import { MOVIE_URL, POSTER_URL } from "../../api/api-client";
 import { textTruncate } from "../../utils/utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorites, removeFromFavorites } from "../../redux/actions/movieActions";
 
 const MovieItem = ({ movie }) => {
     const classes = useStyles();
     const [ isFavorite, setIsFavorite ] = useState(false);
+    const { isAuthenticated, favoritesIDS } = useSelector(state => ({
+        isAuthenticated: state.auth.isAuthenticated,
+        favoritesIDS: state.movie.favoritesIDS
+    }));
     const navigate = useNavigate();
-    const { isAuthenticated } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
 
-    const addToFavorites = (id) => {
-        console.log('added');
+    useEffect(() => {
+        if(isAuthenticated) {
+            checkIsFavorite()
+        }
+    }, [])
+
+    const checkIsFavorite = () => {
+        setIsFavorite(favoritesIDS.includes(movie.id));
+    }
+
+    const handleAddFavorite = (movie) => {
+        dispatch(addToFavorites(movie));
         setIsFavorite(true);
     };
 
-    const removeFromFavorites = (id) => {
-        console.log('removed');
+    const handleRemoveFavorite = (id) => {
+        dispatch(removeFromFavorites(id));
         setIsFavorite(false);
     };
 
-    const handleFavoriteCLick = (id) => {
-        console.log('clicked', id);
-        if(!isAuthenticated) navigate('/login');
+    const handleFavoriteCLick = (movie) => {
+        if(!isAuthenticated) {
+            navigate('/login');
+            return;
+        };
         setIsFavorite((prevState) => {
-            !prevState ? addToFavorites(id) : removeFromFavorites(id);
+            !prevState ? handleAddFavorite(movie) : handleRemoveFavorite(movie.id);
         });
     };
 
@@ -50,23 +67,28 @@ const MovieItem = ({ movie }) => {
                         {movie.release_date}
                     </Typography>
                     <Box className={classes.ratingWrapper}>
-                        <Box className={classes.rating}>
-                            <Typography sx={{ zIndex: 1 }} variant="caption" component="div" color="#fff">
-                                {`${movie.vote_average * 10}%`}
-                            </Typography>
-                        </Box>
+                        <Tooltip title={`Rating on ${movie.vote_count} votes`} TransitionComponent={Zoom} arrow
+                                 placement="right">
+                            <Box className={classes.rating}>
+                                <Typography sx={{ zIndex: 1 }} variant="caption" component="div" color="#fff">
+                                    {`${movie.vote_average * 10}%`}
+                                </Typography>
+                            </Box>
+                        </Tooltip>
                         <CircularProgress color="warning" variant="determinate" value={movie.vote_average * 10}/>
                     </Box>
                 </CardContent>
             </Link>
-            <IconButton aria-label="add to favorites" className={classes.addFavorite}
-                        onClick={() => handleFavoriteCLick(movie.id)}>
-                {isFavorite ?
-                    <StarIcon className={classes.favoriteIcon} fontSize="large"/> :
-                    <StarBorderIcon className={classes.favoriteIcon} fontSize="large"/>}
-            </IconButton>
+            <Tooltip title={!isAuthenticated ? 'You must be authorized!' : ''} placement="left" arrow>
+                <IconButton aria-label="add to favorites" className={classes.addFavorite}
+                            onClick={() => handleFavoriteCLick(movie)}>
+                    {isFavorite ?
+                        <StarIcon className={classes.favoriteIcon} fontSize="large"/> :
+                        <StarBorderIcon className={classes.favoriteIcon} fontSize="large"/>}
+                </IconButton>
+            </Tooltip>
         </Card>
     );
 };
-// className={isFavorite ? classes.favoriteUnactive : classes.favoriteActive}
+
 export default MovieItem;

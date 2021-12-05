@@ -24,6 +24,18 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             color: theme.palette.link
         },
+    },
+    logoutButton: {
+        width: 'auto',
+        margin: '0 10px',
+        display: 'block',
+        textDecoration: 'none',
+        color: theme.palette.common.white,
+        padding: '5px 10px',
+        transition: 'color .3s ease-in-out, background .5s ease-in-out',
+        '&:hover': {
+            color: theme.palette.link
+        },
     }
 }));
 
