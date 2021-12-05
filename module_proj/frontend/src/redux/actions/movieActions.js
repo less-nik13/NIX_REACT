@@ -1,17 +1,21 @@
 import {
     ADD_TO_FAVORITES,
-    ADD_TO_FAVORITES_IDS, GET_FAVORITES,
+    ADD_TO_FAVORITES_IDS,
     GET_FILMS,
+    GET_FAVORITES,
     LOADING_MOVIES_FINISHED,
-    LOADING_MOVIES_STARTED, REMOVE_FROM_FAVORITES, REMOVE_FROM_FAVORITES_IDS,
+    LOADING_MOVIES_STARTED,
+    REMOVE_FROM_FAVORITES,
+    REMOVE_FROM_FAVORITES_IDS,
     SET_USER_FAVORITES_IDS
 } from "../types/movieTypes";
-import { setAlert } from "./alertActions";
 import {
-    ADD_TO_FAVORITES_URL, GET_FAVORITES_URL,
+    ADD_TO_FAVORITES_URL,
+    GET_FAVORITES_URL,
     GET_MOVIES_URL,
     REMOVE_FROM_FAVORITES_URL
 } from "../../api/api-client";
+import { setAlert } from "./alertActions";
 import { apiInstance } from "../../api/axios.config";
 import { serverInstance } from "../../api/server.config";
 import { setAuthHeaders } from "../../utils/utils";

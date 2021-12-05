@@ -17,14 +17,14 @@ import {
     List, MenuItem
 } from "@mui/material";
 
-import logo from '../../Logo.png';
+import logo from '../../images/Logo.png';
 import NavSearch from "../NavSearch/NavSearch";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 
 import useStyles from './navbar.style';
 import { logout } from "../../redux/actions/authActions";
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({bgColor}) => {
     const [ anchorElUser, setAnchorElUser ] = React.useState(null);
     const { isAuthenticated, currentUser } = useSelector(state => state.auth);
     const theme = useTheme();
@@ -48,7 +48,7 @@ const ResponsiveAppBar = () => {
     };
 
     return (
-        <AppBar position="fixed">
+        <AppBar sx={bgColor && { backgroundColor: bgColor }} position="fixed">
             <Container maxWidth="xl">
                 <Toolbar>
                     <Typography

@@ -1,10 +1,10 @@
-import { setAlert } from "./alertActions";
-import { LOGIN_SUCCESS, LOGOUT } from "../types/authTypes";
 import { serverInstance } from "../../api/server.config";
 import { LOGIN_URL, LOGOUT_URL, REGISTER_URL } from "../../api/api-client";
+import { setAlert } from "./alertActions";
 import { setUserFavoritesIDS } from "./movieActions";
-import { setAuthHeaders } from "../../utils/utils";
+import { LOGIN_SUCCESS, LOGOUT } from "../types/authTypes";
 import { CLEAR_MOVIES } from "../types/movieTypes";
+import { setAuthHeaders } from "../../utils/utils";
 
 // Register user
 export const register = (userCredentials, navigate) => async dispatch => {

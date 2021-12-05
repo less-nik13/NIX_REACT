@@ -16,6 +16,10 @@ const useStyles = makeStyles(theme => ({
             border: `1px solid ${theme.palette.link}`,
         }
     },
+    message: {
+        textAlign: 'center',
+        margin: '25px 15px'
+    }
 }));
 
 export default useStyles;

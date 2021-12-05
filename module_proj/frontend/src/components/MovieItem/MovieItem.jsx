@@ -52,7 +52,7 @@ const MovieItem = ({ movie }) => {
 
     return (
         <Card sx={{ maxWidth: 340 }} className={classes.movieItemWrapper}>
-            <Link to={`${MOVIE_URL}/${movie.id}/?api_key=${process.env.REACT_APP_API_KEY}`} className={classes.link}>
+            <Link to={`movie/${movie.id}`} className={classes.link}>
                 <CardMedia
                     className={classes.movieImage}
                     component="img"

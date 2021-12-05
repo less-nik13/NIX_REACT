@@ -3,13 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import Avatar from '@mui/material/Avatar';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import {
+    Avatar,
+    Paper,
+    Box,
+    Grid,
+    Typography
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 
+import { AUTH_BACKGROUND_URL } from "../../api/api-client";
 import { login } from "../../redux/actions/authActions";
 import Copyright from "../../components/Copyright/Copyright";
 import LoginForm from "../../components/LoginForm/LoginForm";
@@ -26,7 +29,7 @@ const LoginPage = () => {
         if(isAuthenticated) {
             navigate('/');
         } // eslint-disable-next-line
-    }, [ isAuthenticated ]);
+    }, []);
 
     const loginValidation = yup.object().shape({
         email: yup.string().required("Email is required!").email("Email is not valid!"),
@@ -34,15 +37,14 @@ const LoginPage = () => {
     });
 
     const handleSubmit = (values) => {
-        console.log(values);
-        dispatch(login(values, navigate))
+        dispatch(login(values, navigate));
     };
 
     return (
         <Grid container component="main" sx={{ height: '100vh' }}>
             <Grid item xs={false} sm={4} md={7}
                   sx={{
-                      backgroundImage: 'url(https://images.unsplash.com/photo-1592438224611-fa028bc2c22c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80)',
+                      backgroundImage: `url(${AUTH_BACKGROUND_URL})`,
                       backgroundRepeat: 'no-repeat',
                       backgroundColor: (t) =>
                           t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
