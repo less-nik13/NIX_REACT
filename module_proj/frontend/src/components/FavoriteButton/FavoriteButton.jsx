@@ -24,7 +24,7 @@ const FavoriteButton = ({ movie, position }) => {
             checkIsFavorite();
         }
         // eslint-disable-next-line
-    }, []);
+    }, [ isAuthenticated ]);
 
     const checkIsFavorite = () => {
         setIsFavorite(favoritesIDS.includes(movie.id));
@@ -45,7 +45,7 @@ const FavoriteButton = ({ movie, position }) => {
             navigate('/login');
             return;
         }
-        ;
+
         setIsFavorite((prevState) => {
             !prevState ? handleAddFavorite(movie) : handleRemoveFavorite(movie.id);
         });

@@ -27,7 +27,7 @@ const MovieItem = ({ movie }) => {
                         {textTruncate(movie.title)}
                     </Typography>
                     <Typography gutterBottom variant="body1" component="p">
-                        {movie.release_date}
+                        {movie.release_date ? movie.release_date : 'Release Date: -'}
                     </Typography>
                     <Box className={classes.ratingWrapper}>
                         <Tooltip title={`Rating on ${movie.vote_count} votes`} TransitionComponent={Zoom} arrow

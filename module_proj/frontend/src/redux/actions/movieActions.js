@@ -24,12 +24,16 @@ import { setAlert } from "./alertActions";
 import { serverInstance } from "../../api/server.config";
 import { setAuthHeaders } from "../../utils/utils";
 
-export const loadMovies = async (endpoint, currentPage, params, dispatch) => {
+export const loadMovies = async (endpoint, currentPage, totalPages, params, dispatch) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}${endpoint}?api_key=${process.env.REACT_APP_API_KEY}&page=${currentPage}${params && params}`);
+        dispatch({ type: LOADING_MOVIES_STARTED });
+        const response = await axios.get(`${API_BASE_URL}${endpoint}?api_key=${process.env.REACT_APP_API_KEY}&page=${currentPage}${params ? params : ''}`);
         const moviesData = response.data;
 
-        dispatch({ type: LOADING_MOVIES_STARTED });
+        if(moviesData.total_pages !== totalPages) {
+            moviesData.page = 1;
+        }
+
         if(response.status === 200) {
             dispatch({ type: LOADING_MOVIES_FINISHED });
             dispatch({ type: GET_MOVIES, payload: moviesData });
@@ -39,8 +43,8 @@ export const loadMovies = async (endpoint, currentPage, params, dispatch) => {
     }
 };
 
-export const getMovies = (url, currentPage, params) => (dispatch) => {
-    loadMovies(url, currentPage, params, dispatch);
+export const getMovies = (url, currentPage, totalPages, params) => (dispatch) => {
+    loadMovies(url, currentPage, totalPages, params, dispatch);
 };
 
 // request to localhost:5000
@@ -101,8 +105,8 @@ export const removeFromFavorites = (id) => async (dispatch) => {
     }
 };
 
-export const getMoviesBySearchQuery = (currentPage, query) => (dispatch) => {
-    loadMovies(SEARCH_URL, currentPage, `&query=${query}`, dispatch);
+export const getMoviesBySearchQuery = (currentPage, totalPages, query) => (dispatch) => {
+    loadMovies(SEARCH_URL, currentPage, totalPages, `&query=${query}`, dispatch);
 };
 
 export const setUserFavoritesIDS = (favorites) => {

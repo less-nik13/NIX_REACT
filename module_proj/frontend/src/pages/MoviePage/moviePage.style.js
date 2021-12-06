@@ -35,7 +35,10 @@ const useStyles = makeStyles(theme => ({
         fontSize: '36px',
         lineHeight: 1.5,
         textTransform: 'capitalize',
-        marginRight: '15px'
+        marginRight: '15px',
+        '@media (max-width: 700px)': {
+            fontSize: '26px'
+        }
     },
     genre: {
         padding: theme.spacing(1, 3),
@@ -69,6 +72,9 @@ const useStyles = makeStyles(theme => ({
         maxWidth: '60%',
         '@media (max-width: 930px)': {
             maxWidth: '80%',
+        },
+        '@media (max-width: 700px)': {
+            fontSize: '14px'
         }
     },
     secondaryInfo: {
@@ -113,6 +119,7 @@ const useStyles = makeStyles(theme => ({
         cursor: 'pointer',
         overflow: 'hidden',
         borderRadius: '50%',
+        marginLeft: '15px',
         backgroundColor: 'rgba(0,0,0,0.6)',
         '&:hover': {
             transition: 'all .5s ease-in-out',

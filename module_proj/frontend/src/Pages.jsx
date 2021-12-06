@@ -22,19 +22,19 @@ function Pages() {
                 <Routes>
                     <Route exact path="/" element={
                         <PublicLayout>
-                            <MoviesPage url={GET_MOVIES_URL}/>
+                            <MoviesPage url={GET_MOVIES_URL} title="Home"/>
                         </PublicLayout>}
                     />
 
                     <Route exact path="/upcoming" element={
                         <PublicLayout>
-                            <MoviesPage url={UPCOMING_URL}/>
+                            <MoviesPage url={UPCOMING_URL} title="Upcoming"/>
                         </PublicLayout>}
                     />
 
                     <Route exact path="/top_rated" element={
                         <PublicLayout>
-                            <MoviesPage url={TOP_RATED_URL}/>
+                            <MoviesPage url={TOP_RATED_URL} title="Top Rated"/>
                         </PublicLayout>}
                     />
 

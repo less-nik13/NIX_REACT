@@ -1,11 +1,13 @@
 export const API_BASE_URL = 'https://api.themoviedb.org/3';
 export const GET_MOVIES_URL = '/discover/movie';
-export const POSTER_URL = 'https://image.tmdb.org/t/p/original';
+export const POSTER_URL = 'https://image.tmdb.org/t/p/w300_and_h450_face';
+export const BACKDROP_IMAGE_URL = 'https://image.tmdb.org/t/p/original';
 export const MOVIE_URL = '/movie';
 export const SEARCH_URL = '/search/movie';
-export const GENRES_URL = '/genre/movie/list';
 export const UPCOMING_URL = '/movie/upcoming';
 export const TOP_RATED_URL = '/movie/top_rated';
+export const GENRES_URL = '/genre/movie/list';
+
 // SERVER
 export const SERVER_BASE_URL = 'http://localhost:5000/api/';
 export const LOGIN_URL = 'auth/login';

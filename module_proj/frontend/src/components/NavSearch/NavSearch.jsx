@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { alpha, styled } from "@mui/material/styles";
 import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { getMovies, setSearch } from "../../redux/actions/movieActions";
+import { changePage, setSearch } from "../../redux/actions/movieActions";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -44,32 +45,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavSearch = () => {
+    const [ searchQuery, setSearchQuery ] = useState('');
     const dispatch = useDispatch();
-    const {
-        search,
-        pagination: {
-            currentPage
-        }
-    } = useSelector(state => state.movie);
-    const [ searchQuery, setSearchQuery ] = useState(search);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handleKeyDown = (e) => {
         if(e.keyCode === 13) {
+            dispatch(changePage(1));
             dispatch(setSearch(searchQuery));
 
             if(!e.target.value) {
-                dispatch(getMovies(currentPage));
+                dispatch(setSearch(searchQuery));
+            }
+
+            if(location.pathname !== '/') {
+                navigate('/');
             }
             return;
         }
     };
 
-    const handleSearchChange = ({ target: { value } }) => {
-        setSearchQuery(value.trim());
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
     };
 
     return (
-        <Search onChange={handleSearchChange} value={search} onKeyDown={handleKeyDown}>
+        <Search onChange={handleSearchChange} value={searchQuery} onKeyDown={handleKeyDown}>
             <SearchIconWrapper>
                 <SearchIcon/>
             </SearchIconWrapper>

@@ -7,13 +7,14 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 import { setAlert } from "../../redux/actions/alertActions";
 import { apiInstance } from "../../api/axios.config";
-import { MOVIE_URL, POSTER_URL } from "../../api/api-client";
+import { BACKDROP_IMAGE_URL, MOVIE_URL } from "../../api/api-client";
 import { convertDuration, moneyFormat, textTruncate } from "../../utils/utils";
 import PlayButton from "../../components/PlayButton/PlayButton";
 import CustomModal from '../../components/CustomModal/CustomModal';
 import TrailerIframe from "../../components/TrailerIframe/TrailerIframe";
 import Loading from "../../components/Loading/Loading";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
+import fallbackImage from '../../images/black-glitch-effect-texture.jpg';
 
 import useStyles from './moviePage.style';
 
@@ -60,7 +61,7 @@ const MoviePage = () => {
         <>
             {loading ? <Loading/> :
                 <Box className={classes.movieWrapper}
-                     sx={movie.backdrop_path && { backgroundImage: `url(${POSTER_URL}${movie.backdrop_path})` }}>
+                     sx={{ backgroundImage: `url(${movie.backdrop_path ? `${BACKDROP_IMAGE_URL}${movie.backdrop_path}` : fallbackImage})` }}>
                     <div className={classes.infoSection}>
                         <Button className={classes.backButton} onClick={() => navigate(-1)}
                                 startIcon={<KeyboardBackspaceIcon/>}>
@@ -76,9 +77,10 @@ const MoviePage = () => {
                                                   className={classes.link}>
                                         <LinkIcon size="large"/>
                                     </MaterialLink>}
-                                <Box className={classes.playButtonWrapper} onClick={handleOpen}>
-                                    <PlayButton/>
-                                </Box>
+                                {movie.videos.results.length > 0 &&
+                                    <Box className={classes.playButtonWrapper} onClick={handleOpen}>
+                                        <PlayButton/>
+                                    </Box>}
                             </div>
                         </div>
                         <header className={classes.movieHeader}>
@@ -107,7 +109,8 @@ const MoviePage = () => {
                                 {textTruncate(movie.overview, 300)}
                             </Typography>
                             <Typography className={classes.status} variant="h4" color="inherit">
-                                Status: {movie.status}{movie.vote_average ? `, Rating: ${movie.vote_average}` : null}
+                                Status: {movie.status}{movie.vote_count ? ` , Votes: ${movie.vote_count}` : null}
+                                {movie.vote_average ? `, Rating: ${movie.vote_average}` : null}
                             </Typography>
                             <Typography
                                 className={classes.secondaryInfo}
