@@ -92,7 +92,7 @@ function DrawerComponent({ isAuthenticated }) {
                         </NavLink>
                     </ListItem>
                     <ListItem sx={{ padding: 0, transition: 'background .6s ease-in-out' }} button disableGutters>
-                        <NavLink className={classes.link} to="/top" style={({ isActive }) => ({
+                        <NavLink className={classes.link} to="/top_rated" style={({ isActive }) => ({
                             color: isActive ? "#ffd537" : ""
                         })}>
                             Top Rated

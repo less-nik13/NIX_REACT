@@ -27,7 +27,7 @@ const MoviePage = () => {
     const [ open, setOpen ] = useState(false);
 
     const handleOpen = () => {
-        if(!movie.videos.results.length) {
+        if(!movie.videos.results.some(video => video.type === 'Trailer')) {
             dispatch(setAlert('Trailers Not Found!', 'error', 4000));
             return;
         }
@@ -60,7 +60,7 @@ const MoviePage = () => {
         <>
             {loading ? <Loading/> :
                 <Box className={classes.movieWrapper}
-                     sx={{ backgroundImage: `url(${POSTER_URL}${movie.backdrop_path})` }}>
+                     sx={movie.backdrop_path && { backgroundImage: `url(${POSTER_URL}${movie.backdrop_path})` }}>
                     <div className={classes.infoSection}>
                         <Button className={classes.backButton} onClick={() => navigate(-1)}
                                 startIcon={<KeyboardBackspaceIcon/>}>
@@ -128,7 +128,7 @@ const MoviePage = () => {
                                 Adult: {movie.adult ? "Yes" : "No"}
                             </Typography>
                         </header>
-                        {movie.videos.results.length > 0 &&
+                        {movie.videos.results.some(video => video.type === 'Trailer') &&
                             <CustomModal onClose={handleClose} isOpen={open}>
                                 <TrailerIframe
                                     trailerUrl={movie.videos.results.find(video => video.type === 'Trailer').key}/>

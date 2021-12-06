@@ -83,7 +83,7 @@ const ResponsiveAppBar = ({bgColor}) => {
                                         </NavLink>
                                     </ListItem>
                                     <ListItem className={classes.listItem} sx={{ padding: 0 }} button disableGutters>
-                                        <NavLink className={classes.link} to="/top" style={({ isActive }) => ({
+                                        <NavLink className={classes.link} to="/top_rated" style={({ isActive }) => ({
                                             color: isActive ? "#ffd537" : ""
                                         })}>
                                             Top Rated

@@ -4,27 +4,40 @@ import {
     SET_USER_FAVORITES_IDS,
     ADD_TO_FAVORITES_IDS,
     ADD_TO_FAVORITES,
-    GET_FILMS,
+    GET_MOVIES,
     REMOVE_FROM_FAVORITES_IDS,
     REMOVE_FROM_FAVORITES,
     GET_FAVORITES,
-    CLEAR_MOVIES
+    CLEAR_MOVIES, SET_SEARCH, CHANGE_PAGE
 } from "../types/movieTypes";
 
 const initialState = {
     movies: [],
     favorites: [],
     favoritesIDS: [],
+    pagination: {
+        currentPage: 1,
+        totalPages: 1,
+    },
+    filters: {
+        genres: [],
+        userScore: [],
+        sort: '',
+    },
+    filterOption: {
+        genres: []
+    },
+    search: '',
     loading: true,
-    currentPage: 1,
-    totalPages: 1
 };
 
 const movieReducer = (state = initialState, { type, payload }) => {
     switch(type) {
-        case GET_FILMS:
+        case GET_MOVIES:
             return {
-                ...state, movies: payload.results, currentPage: payload.page, totalPages: payload.total_pages
+                ...state,
+                movies: payload.results,
+                pagination: { currentPage: payload.page, totalPages: payload.total_pages }
             };
         case LOADING_MOVIES_STARTED:
             return {
@@ -63,6 +76,19 @@ const movieReducer = (state = initialState, { type, payload }) => {
         case CLEAR_MOVIES:
             return {
                 ...initialState
+            };
+        case SET_SEARCH:
+            return {
+                ...state,
+                search: payload
+            };
+        case CHANGE_PAGE:
+            return {
+                ...state,
+                pagination: {
+                    ...state.pagination,
+                    currentPage: payload
+                }
             };
         default:
             return state;

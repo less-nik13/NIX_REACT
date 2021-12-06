@@ -2,57 +2,68 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
 
-import { getMovies } from "../../redux/actions/movieActions";
+import { changePage, getMovies, getMoviesBySearchQuery } from "../../redux/actions/movieActions";
 import MovieList from "../../components/MovieList/MovieList";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import MovieListLoader from "../../components/MovieListLoader/MovieListLoader";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 
-const MoviesPage = () => {
-    const { loading, currentPage, totalPages, movies } = useSelector(state => state.movie);
-    const [ page, setPage ] = useState('1');
+const MoviesPage = ({ url }) => {
+    const {
+        loading,
+        movies,
+        search,
+        pagination: {
+            currentPage,
+            totalPages
+        },
+    } = useSelector(state => state.movie);
     const dispatch = useDispatch();
+    const [ page, setPage ] = useState(currentPage);
 
     useEffect(() => {
-        if(!movies.length) {
-            dispatch(getMovies());
+        if(search) {
+            dispatch(getMoviesBySearchQuery(currentPage, search));
+        } else {
+            dispatch(getMovies(url, currentPage));
         }
-    }, [ movies, dispatch ]);
+    }, [ currentPage, search, dispatch, url ]);
+
 
     const handlePagination = (event, value) => {
         if(value === currentPage) return;
-        setPage(value.toString());
-        dispatch(getMovies({ page: value }));
+        setPage(value);
+        dispatch(changePage(value));
     };
 
     const handlePageChange = ({ target: { value } }) => {
         if(+value < 1 || +value > totalPages) return;
-        setPage(value);
+        setPage(+value);
     };
 
     const onBlurChangePage = () => {
-        if(+page !== currentPage) dispatch(getMovies({ page }));
+        if(+page !== currentPage) dispatch(changePage(page));
     };
 
     const onKeyDownChangePage = (e) => {
         if(+page !== currentPage && (e.which === 13 || e.keyCode === 13 || e.key === "Enter")) {
-            dispatch(getMovies({ page }));
+            dispatch(changePage(page));
         }
     };
 
     return (
         <Box sx={{ width: '100%' }}>
-            <PageHeader title="Home"/>
+            <PageHeader title={search ? `Search Results: ${search}` : "Home"}/>
             {loading ? <MovieListLoader/> : <>
                 <MovieList movies={movies}/>
-                <CustomPagination totalPages={totalPages}
-                                  currentPage={currentPage}
-                                  page={page}
-                                  handlePagination={handlePagination}
-                                  onBlurChangePage={onBlurChangePage}
-                                  onKeyDownChangePage={onKeyDownChangePage}
-                                  handlePageChange={handlePageChange}
-                />
+                {movies.length > 0 && <CustomPagination totalPages={totalPages}
+                                                        currentPage={currentPage}
+                                                        page={page}
+                                                        handlePagination={handlePagination}
+                                                        onBlurChangePage={onBlurChangePage}
+                                                        onKeyDownChangePage={onKeyDownChangePage}
+                                                        handlePageChange={handlePageChange}
+                />}
             </>}
         </Box>
     );

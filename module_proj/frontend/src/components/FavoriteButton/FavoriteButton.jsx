@@ -23,6 +23,7 @@ const FavoriteButton = ({ movie, position }) => {
         if(isAuthenticated) {
             checkIsFavorite();
         }
+        // eslint-disable-next-line
     }, []);
 
     const checkIsFavorite = () => {

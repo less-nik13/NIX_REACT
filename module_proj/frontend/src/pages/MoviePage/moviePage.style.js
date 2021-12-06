@@ -131,7 +131,7 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute',
         bottom: 0,
         left: 0,
-        padding: '25px 35px',
+        padding: '15px 75px',
         fontSize: '24px',
         textTransform: 'capitalize',
         backgroundColor: theme.palette.common.blue,

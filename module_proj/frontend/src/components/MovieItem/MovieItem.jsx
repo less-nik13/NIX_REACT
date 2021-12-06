@@ -5,11 +5,13 @@ import { Box, Card, CardContent, CardMedia, CircularProgress, Tooltip, Typograph
 import { POSTER_URL } from "../../api/api-client";
 import { textTruncate } from "../../utils/utils";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import imageNotFound from '../../images/image_not_found.png';
 
 import useStyles from "./movieItem.style";
 
 const MovieItem = ({ movie }) => {
     const classes = useStyles();
+    const movieImage = movie.poster_path ? `${POSTER_URL}/${movie.poster_path}` : imageNotFound;
 
     return (
         <Card sx={{ maxWidth: 340 }} className={classes.movieItemWrapper}>
@@ -17,7 +19,7 @@ const MovieItem = ({ movie }) => {
                 <CardMedia
                     className={classes.movieImage}
                     component="img"
-                    image={`${POSTER_URL}/${movie.poster_path}`}
+                    image={movieImage}
                     alt={movie.title}
                 />
                 <CardContent className={classes.details}>

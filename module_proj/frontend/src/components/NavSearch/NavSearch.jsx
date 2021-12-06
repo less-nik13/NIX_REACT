@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { alpha, styled } from "@mui/material/styles";
 import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+
+import { getMovies, setSearch } from "../../redux/actions/movieActions";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -41,8 +44,32 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavSearch = () => {
+    const dispatch = useDispatch();
+    const {
+        search,
+        pagination: {
+            currentPage
+        }
+    } = useSelector(state => state.movie);
+    const [ searchQuery, setSearchQuery ] = useState(search);
+
+    const handleKeyDown = (e) => {
+        if(e.keyCode === 13) {
+            dispatch(setSearch(searchQuery));
+
+            if(!e.target.value) {
+                dispatch(getMovies(currentPage));
+            }
+            return;
+        }
+    };
+
+    const handleSearchChange = ({ target: { value } }) => {
+        setSearchQuery(value.trim());
+    };
+
     return (
-        <Search>
+        <Search onChange={handleSearchChange} value={search} onKeyDown={handleKeyDown}>
             <SearchIconWrapper>
                 <SearchIcon/>
             </SearchIconWrapper>

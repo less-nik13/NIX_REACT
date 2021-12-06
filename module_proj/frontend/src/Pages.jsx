@@ -5,6 +5,7 @@ import NotFound from "./pages/404/NotFound";
 import Spinner from "./components/Spinner/Spinner";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicLayout from "./layouts/PublicLayout/PublicLayout";
+import { GET_MOVIES_URL, TOP_RATED_URL, UPCOMING_URL } from "./api/api-client";
 
 const RegisterPage = React.lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const LoginPage = React.lazy(() => import('./pages/LoginPage/LoginPage'));
@@ -21,19 +22,19 @@ function Pages() {
                 <Routes>
                     <Route exact path="/" element={
                         <PublicLayout>
-                            <MoviesPage/>
+                            <MoviesPage url={GET_MOVIES_URL}/>
                         </PublicLayout>}
                     />
 
                     <Route exact path="/upcoming" element={
                         <PublicLayout>
-                            <MoviesPage/>
+                            <MoviesPage url={UPCOMING_URL}/>
                         </PublicLayout>}
                     />
 
-                    <Route exact path="/topRated" element={
+                    <Route exact path="/top_rated" element={
                         <PublicLayout>
-                            <MoviesPage/>
+                            <MoviesPage url={TOP_RATED_URL}/>
                         </PublicLayout>}
                     />
 
