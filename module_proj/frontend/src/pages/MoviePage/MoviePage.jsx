@@ -1,62 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Link as MaterialLink, Button } from "@mui/material";
+import LinkIcon from '@mui/icons-material/Link';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 import { setAlert } from "../../redux/actions/alertActions";
 import { apiInstance } from "../../api/axios.config";
 import { MOVIE_URL, POSTER_URL } from "../../api/api-client";
-import { convertDuration, moneyFormat } from "../../utils/utils";
+import { convertDuration, moneyFormat, textTruncate } from "../../utils/utils";
 import PlayButton from "../../components/PlayButton/PlayButton";
 import CustomModal from '../../components/CustomModal/CustomModal';
 import TrailerIframe from "../../components/TrailerIframe/TrailerIframe";
 import Loading from "../../components/Loading/Loading";
+import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 
 import useStyles from './moviePage.style';
 
 const MoviePage = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { id } = useParams();
     const [ movie, setMovie ] = useState(null);
     const [ loading, setLoading ] = useState(true);
-    const [ videos, setVideos ] = useState([]);
     const [ open, setOpen ] = useState(false);
 
-    const handleOpen = async () => {
-        setOpen(true);
-        if(!videos.length) getTrailersData();
-    };
-
-    const handleClose = () => setOpen(false);
-
-    const getTrailersData = async () => {
-        try {
-            const response = await apiInstance(`https://api.themoviedb.org/3/movie/${id}/videos`);
-            const { results } = response.data;
-
-            if(!results.length) {
-                dispatch(setAlert('Trailers Not Found!', 'error', 4000));
-                return;
-            }
-            setVideos(results);
-        } catch(error) {
-            dispatch(setAlert(error.response.data.message, 'error', 4000));
+    const handleOpen = () => {
+        if(!movie.videos.results.length) {
+            dispatch(setAlert('Trailers Not Found!', 'error', 4000));
+            return;
         }
-    };
 
-    console.log(videos);
+        setOpen(true);
+    };
+    const handleClose = () => setOpen(false);
 
     useEffect(() => {
         async function getMovieData() {
-            const { data } = await apiInstance(`${MOVIE_URL}/${id}`);
-            setMovie(data);
-            setLoading(false);
+            try {
+                setLoading(true);
+                const { data } = await apiInstance(`${MOVIE_URL}/${id}`, {
+                    params: {
+                        append_to_response: 'videos'
+                    }
+                });
+
+                setMovie(data);
+                setLoading(false);
+            } catch(error) {
+                dispatch(setAlert(error.response.data.message, 'error', 4000));
+            }
         }
 
         getMovieData();
-
-    }, [id]);
+    }, [ id, dispatch ]);
 
     return (
         <>
@@ -64,74 +62,76 @@ const MoviePage = () => {
                 <Box className={classes.movieWrapper}
                      sx={{ backgroundImage: `url(${POSTER_URL}${movie.backdrop_path})` }}>
                     <div className={classes.infoSection}>
+                        <Button className={classes.backButton} onClick={() => navigate(-1)}
+                                startIcon={<KeyboardBackspaceIcon/>}>
+                            Back
+                        </Button>
+                        <div className={classes.wrapper}>
+                            <FavoriteButton movie={movie} position={{ position: 'relative' }}/>
+                            <div className={classes.iconsWrapper}>
+                                {movie.homepage &&
+                                    <MaterialLink href={movie.homepage}
+                                                  target="_blank"
+                                                  rel="noopener"
+                                                  className={classes.link}>
+                                        <LinkIcon size="large"/>
+                                    </MaterialLink>}
+                                <Box className={classes.playButtonWrapper} onClick={handleOpen}>
+                                    <PlayButton/>
+                                </Box>
+                            </div>
+                        </div>
                         <header className={classes.movieHeader}>
-                            <Box mb={3} display="flex" alignItems="center" flexWrap="wrap">
+                            <Box my={3} display="flex" alignItems="center" flexWrap="wrap">
                                 {movie.genres.map((genre) => (
                                     <Typography
                                         key={genre.id}
-                                        className={classes.tag}
+                                        className={classes.genre}
                                         variant="body1"
                                         color="inherit">
                                         {genre.name}
                                     </Typography>
                                 ))}
-
-                                {/*<StyledRating*/}
-                                {/*    value={4}*/}
-                                {/*    readOnly*/}
-                                {/*    size="small"*/}
-                                {/*    emptyIcon={<StarBorderIcon fontSize="inherit" />}*/}
-                                {/*/>*/}
                             </Box>
-                            <Typography
-                                className={classes.movieTitle}
-                                variant="h1"
-                                color="inherit">
-                                {movie.title}{' '}
-                                <sup className={classes.language}>({movie.original_language})</sup>
-                            </Typography>
+                            <Box className={classes.movieTitleWrapper}>
+                                <Typography variant="h1"
+                                            color="inherit" className={classes.movieTitle}>
+                                    {movie.title}{' '}
+                                    <sup className={classes.language}>({movie.original_language})</sup>
+                                </Typography>
+                            </Box>
                             <Typography
                                 className={classes.descriptionText}
                                 variant="body1"
                                 color="inherit">
-                                {movie.overview}
+                                {textTruncate(movie.overview, 300)}
                             </Typography>
                             <Typography className={classes.status} variant="h4" color="inherit">
-                                Status: {movie.status}
+                                Status: {movie.status}{movie.vote_average ? `, Rating: ${movie.vote_average}` : null}
                             </Typography>
                             <Typography
-                                className={classes.runtime}
+                                className={classes.secondaryInfo}
                                 variant="body1"
                                 color="inherit">
                                 Runtime: {movie.runtime ? convertDuration(movie.runtime) : "-"}
                             </Typography>
                             <Typography
-                                className={classes.releaseDate}
+                                className={classes.secondaryInfo}
                                 variant="body1"
                                 color="inherit">
                                 Release: {movie.release_date}
                             </Typography>
-                            <Typography className={classes.revenue} variant="body1" color="inherit">
+                            <Typography className={classes.secondaryInfo} variant="body1" color="inherit">
                                 Revenue: {movie.revenue ? moneyFormat(movie.revenue) : "-"}
                             </Typography>
-                            <Typography className={classes.adult} variant="body1" color="inherit">
+                            <Typography className={classes.secondaryInfo} variant="body1" color="inherit">
                                 Adult: {movie.adult ? "Yes" : "No"}
                             </Typography>
-                            {/*{movie.homepage && <Box className={classes.links}>*/}
-                            {/*    <MaterialLink href={movie.homepage}*/}
-                            {/*                  target="_blank"*/}
-                            {/*                  rel="noopener"*/}
-                            {/*                  className={classes.link}>*/}
-                            {/*        <LinkIcon size="large"/>*/}
-                            {/*    </MaterialLink>*/}
-                            {/*</Box>}*/}
                         </header>
-                        <Box className={classes.playButtonWrapper} onClick={handleOpen}>
-                            <PlayButton/>
-                        </Box>
-                        {videos.length > 0 &&
+                        {movie.videos.results.length > 0 &&
                             <CustomModal onClose={handleClose} isOpen={open}>
-                                <TrailerIframe trailerUrl={videos.find(video => video.type === 'Trailer').key}/>
+                                <TrailerIframe
+                                    trailerUrl={movie.videos.results.find(video => video.type === 'Trailer').key}/>
                             </CustomModal>}
                     </div>
                 </Box>}

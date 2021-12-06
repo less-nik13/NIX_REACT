@@ -4,7 +4,7 @@ const useStyles = makeStyles({
     videoWrapper: {
         position: 'relative',
         overflow: 'hidden',
-        height: '400px',
+        height: '500px',
         '& > iframe': {
             top: 0,
             left: 0,

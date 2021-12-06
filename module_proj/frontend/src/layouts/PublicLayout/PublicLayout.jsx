@@ -12,7 +12,7 @@ const PublicLayout = ({ children, withFooter = true, navbarBg, withContainer = t
             <Navbar bgColor={navbarBg}/>
             {withContainer ?
                 <Container component="main" sx={{ mt: 11, mb: 2, flex: '1 0 auto' }} maxWidth="xl">
-                    <Toolbar id="back-to-top-anchor"/>
+                    <Toolbar id="back-to-top-anchor" sx={{ position: 'absolute' }}/>
                     {children}
                 </Container> : <>{children}</>}
             <ScrollTop>

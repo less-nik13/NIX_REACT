@@ -27,7 +27,7 @@ router.post("/register", async (req, res, next) => {
         const creationDate = new Intl.DateTimeFormat().format(new Date());
 
         // create new user
-        const newUser = { id: generatedId, email, name, password: hashedPassword, createdAt: creationDate };
+        const newUser = { id: generatedId, email, name, password: hashedPassword, createdAt: creationDate, favorites: [] };
         Users.push(newUser);
 
         await db.write();

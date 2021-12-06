@@ -42,13 +42,13 @@ export const getMovies = (options) => async (dispatch) => {
 
 export const getFavorites = () => async (dispatch) => {
     try {
+        dispatch({ type: LOADING_MOVIES_STARTED });
         const response = await serverInstance.get(GET_FAVORITES_URL, {
             headers: setAuthHeaders()
         });
 
         const { favorites } = response.data;
 
-        dispatch({ type: LOADING_MOVIES_STARTED });
 
         if(response.status === 200) {
             dispatch({ type: LOADING_MOVIES_FINISHED });
@@ -59,16 +59,17 @@ export const getFavorites = () => async (dispatch) => {
     }
 };
 
-export const addToFavorites = (movie) => async (dispatch) => {
+export const addToFavorites = (movie) => async (dispatch, getState) => {
     try {
         const response = await serverInstance.post(ADD_TO_FAVORITES_URL, { movie }, {
             headers: setAuthHeaders()
         });
         const { message } = response.data;
+        const state = getState();
 
         if(response.status === 200) {
             dispatch({ type: ADD_TO_FAVORITES_IDS, payload: movie.id });
-            dispatch({ type: ADD_TO_FAVORITES, payload: movie });
+            state.movie.favorites.length && dispatch({ type: ADD_TO_FAVORITES, payload: movie });
             dispatch(setAlert(message, 'success', 4000));
         }
     } catch(error) {

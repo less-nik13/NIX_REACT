@@ -75,7 +75,7 @@ function DrawerComponent({ isAuthenticated }) {
                 variant="persistent"
                 anchor="left"
                 open={open}
-                onClose={() => setOpen(false)}
+                onClose={handleDrawerClose}
             >
                 <DrawerHeader>
                     <IconButton className={classes.closeButton} onClick={handleDrawerClose}>

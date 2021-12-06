@@ -17,7 +17,7 @@ const MoviesPage = () => {
         if(!movies.length) {
             dispatch(getMovies());
         }
-    }, [ movies ]);
+    }, [ movies, dispatch ]);
 
     const handlePagination = (event, value) => {
         if(value === currentPage) return;

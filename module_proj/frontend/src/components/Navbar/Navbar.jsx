@@ -17,12 +17,12 @@ import {
     List, MenuItem
 } from "@mui/material";
 
+import { logout } from "../../redux/actions/authActions";
 import logo from '../../images/Logo.png';
 import NavSearch from "../NavSearch/NavSearch";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 
 import useStyles from './navbar.style';
-import { logout } from "../../redux/actions/authActions";
 
 const ResponsiveAppBar = ({bgColor}) => {
     const [ anchorElUser, setAnchorElUser ] = React.useState(null);

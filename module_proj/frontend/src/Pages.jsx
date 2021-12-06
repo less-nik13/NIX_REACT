@@ -25,6 +25,18 @@ function Pages() {
                         </PublicLayout>}
                     />
 
+                    <Route exact path="/upcoming" element={
+                        <PublicLayout>
+                            <MoviesPage/>
+                        </PublicLayout>}
+                    />
+
+                    <Route exact path="/topRated" element={
+                        <PublicLayout>
+                            <MoviesPage/>
+                        </PublicLayout>}
+                    />
+
                     <Route exact path="/favorites" element={
                         <PrivateRoute>
                             <PublicLayout>
@@ -41,7 +53,7 @@ function Pages() {
                         </PrivateRoute>
                     }/>
 
-                    <Route exact path="/movie/:id" element={
+                    <Route exact path="movie/:id" element={
                         <PublicLayout withFooter={false} navbarBg="transparent" withContainer={false}>
                             <MoviePage/>
                         </PublicLayout>

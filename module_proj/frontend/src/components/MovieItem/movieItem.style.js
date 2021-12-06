@@ -98,24 +98,6 @@ const useStyles = makeStyles(theme => ({
                 position: 'absolute',
                 borderRadius: '50%',
             }
-        },
-        addFavorite: {
-            position: 'absolute',
-            top: '3px',
-            right: '3px',
-            color: theme.palette.link,
-            '&:before': {
-                content: '""',
-                display: 'block',
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(76,77,79,0.5)'
-            }
-        },
-        favoriteIcon: {
-            zIndex: 1
         }
     })
 );
