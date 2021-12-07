@@ -16,8 +16,7 @@ const SCORE_RANGE = [ 0, 100 ];
 const FilterDrawer = ({ sx }) => {
     const {
         filterOption,
-        filters: { sort, genres, userScore },
-        pagination: { currentPage, totalPages }
+        filters: { sort, genres, userScore }
     } = useSelector(state => state.movie);
     const [ open, setOpen ] = useState(false);
     const [ selectedSort, setSelectedSort ] = useState(sort);
