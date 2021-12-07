@@ -11,11 +11,11 @@ import {
     SET_USER_FAVORITES_IDS,
     SET_SEARCH,
     GET_MOVIES,
-    CHANGE_PAGE
+    CHANGE_PAGE, GET_GENRES, SET_FILTERS
 } from "../types/movieTypes";
 import {
     ADD_TO_FAVORITES_URL,
-    API_BASE_URL,
+    API_BASE_URL, GENRES_URL,
     GET_FAVORITES_URL,
     REMOVE_FROM_FAVORITES_URL,
     SEARCH_URL
@@ -23,6 +23,7 @@ import {
 import { setAlert } from "./alertActions";
 import { serverInstance } from "../../api/server.config";
 import { setAuthHeaders } from "../../utils/utils";
+import { apiInstance } from "../../api/axios.config";
 
 export const loadMovies = async (endpoint, currentPage, totalPages, params, dispatch) => {
     try {
@@ -43,8 +44,39 @@ export const loadMovies = async (endpoint, currentPage, totalPages, params, disp
     }
 };
 
+const filtersToQueryParams = (sort, genresIDS, score) => {
+    return `&sort_by=${sort}.desc` +
+        `&with_genres=${genresIDS.toString()}` +
+        `&vote_average.gte=${score[0]}` +
+        `&vote_average.lte=${score[1]}`;
+};
+
+const checkGenresEmpty = (genres) => {
+    return genres.reduce((acc, genre) => {
+        return genres.length ? [ ...acc, genre.id ] : acc;
+    }, []);
+};
+
 export const getMovies = (url, currentPage, totalPages, params) => (dispatch) => {
-    loadMovies(url, currentPage, totalPages, params, dispatch);
+    const genresIDS = params.genres && checkGenresEmpty(params.genres);
+    const checkValue = params.sort || genresIDS.toString() || params.userScore.toString();
+    const newParams = checkValue ? filtersToQueryParams(params.sort, genresIDS, params.userScore) : '';
+
+    loadMovies(url, currentPage, totalPages, newParams, dispatch);
+};
+
+export const getGenres = () => async (dispatch) => {
+    try {
+        const responseData = await apiInstance(GENRES_URL);
+
+        dispatch({ type: GET_GENRES, payload: responseData.data.genres });
+    } catch(error) {
+        dispatch(setAlert(error.response.data.message, 'error', 4000));
+    }
+};
+
+export const getMoviesBySearchQuery = (currentPage, totalPages, query) => (dispatch) => {
+    loadMovies(SEARCH_URL, currentPage, totalPages, `&query=${query}`, dispatch);
 };
 
 // request to localhost:5000
@@ -105,10 +137,6 @@ export const removeFromFavorites = (id) => async (dispatch) => {
     }
 };
 
-export const getMoviesBySearchQuery = (currentPage, totalPages, query) => (dispatch) => {
-    loadMovies(SEARCH_URL, currentPage, totalPages, `&query=${query}`, dispatch);
-};
-
 export const setUserFavoritesIDS = (favorites) => {
     return {
         type: SET_USER_FAVORITES_IDS,
@@ -126,5 +154,16 @@ export const setSearch = (value) => {
 export const changePage = (page) => {
     return {
         type: CHANGE_PAGE, payload: page
+    };
+};
+
+export const setFilters = (sort, genres, userScore) => {
+    return {
+        type: SET_FILTERS,
+        payload: {
+            genres,
+            userScore,
+            sort
+        }
     };
 };

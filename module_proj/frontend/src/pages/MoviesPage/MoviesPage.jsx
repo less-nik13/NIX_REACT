@@ -7,6 +7,7 @@ import MovieList from "../../components/MovieList/MovieList";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import MovieListLoader from "../../components/MovieListLoader/MovieListLoader";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
+import FilterDrawer from "../../components/FiltersDrawer/FilterDrawer";
 
 const MoviesPage = ({ url, title }) => {
     const {
@@ -17,19 +18,24 @@ const MoviesPage = ({ url, title }) => {
             currentPage,
             totalPages
         },
+        filters: {
+            sort,
+            genres,
+            userScore
+        }
     } = useSelector(state => state.movie);
-    const dispatch = useDispatch();
     const [ page, setPage ] = useState(1);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if(search) {
             dispatch(getMoviesBySearchQuery(currentPage, totalPages, search));
             setPage(currentPage);
         } else {
-            dispatch(getMovies(url, currentPage, totalPages));
+            dispatch(getMovies(url, currentPage, totalPages, {sort, genres, userScore}));
             setPage(currentPage);
         }
-    }, [ currentPage, totalPages, search, dispatch, url ]);
+    }, [ currentPage, totalPages, search, dispatch, url, sort, genres, userScore ]);
 
 
     const handlePagination = (event, value) => {
@@ -56,6 +62,7 @@ const MoviesPage = ({ url, title }) => {
 
     return (
         <Box sx={{ width: '100%' }}>
+            {!search && <FilterDrawer sx={{ position: 'absolute', right: '30px'}} />}
             <PageHeader title={search ? `Search Results: ${search}` : title}/>
             {loading ? <MovieListLoader/> : <>
                 <MovieList movies={movies}/>

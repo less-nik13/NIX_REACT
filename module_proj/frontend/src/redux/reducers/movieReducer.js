@@ -8,7 +8,7 @@ import {
     REMOVE_FROM_FAVORITES_IDS,
     REMOVE_FROM_FAVORITES,
     GET_FAVORITES,
-    CLEAR_MOVIES, SET_SEARCH, CHANGE_PAGE
+    CLEAR_MOVIES, SET_SEARCH, CHANGE_PAGE, GET_GENRES, SET_FILTERS
 } from "../types/movieTypes";
 
 const initialState = {
@@ -20,9 +20,9 @@ const initialState = {
         totalPages: 1,
     },
     filters: {
+        sort: '',
         genres: [],
         userScore: [],
-        sort: '',
     },
     filterOption: {
         genres: []
@@ -90,6 +90,22 @@ const movieReducer = (state = initialState, { type, payload }) => {
                     currentPage: payload
                 }
             };
+        case GET_GENRES:
+            return {
+                ...state,
+                filterOption: {
+                    genres: payload
+                }
+            };
+        case SET_FILTERS:
+            return {
+                ...state,
+                filters: {
+                    sort: payload.sort,
+                    genres: payload.genres,
+                    userScore: payload.userScore,
+                }
+            }
         default:
             return state;
     }
